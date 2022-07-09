@@ -7,11 +7,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dachsbau.model.Transaction;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import static com.dachsbau.context.Application.*;
+import com.dachsbau.context.ApplicationConfiguration;
+import com.dachsbau.model.Transaction;
+import com.dachsbau.services.TransactionService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class MyBankServlet extends HttpServlet {
+
+    private TransactionService transactionService;
+    private ObjectMapper objectMapper;
+
+    public void init() {
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
+        this.transactionService = ctx.getBean(TransactionService.class);
+        this.objectMapper = ctx.getBean(ObjectMapper.class);
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {

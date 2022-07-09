@@ -3,12 +3,18 @@ package com.dachsbau.model;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Transaction {
 
     private String id, reference;
+
+    @JsonProperty("bankslogan")
+    private String bankSlogan;
+
     private Integer amount;
 
     @JsonProperty("timestamp")
@@ -17,11 +23,13 @@ public class Transaction {
 
     public Transaction() {}
 
-    public Transaction(Integer amount, String reference, LocalDateTime timeStamp) {
+    @Autowired
+    public Transaction(Integer amount, String reference, LocalDateTime timeStamp, String bankSlogan) {
         this.id = UUID.randomUUID().toString();
         this.amount = amount;
         this.reference = reference;
         this.timeStamp = timeStamp;
+        this.bankSlogan = bankSlogan;
     }
 
     public String getId() {
@@ -56,4 +64,11 @@ public class Transaction {
         this.timeStamp = timeStamp;
     }
 
+    public String getBankSlogan() {
+        return bankSlogan;
+    }
+
+    public void setBankSlogan(String bankSlogan) {
+        this.bankSlogan = bankSlogan;
+    }
 }
