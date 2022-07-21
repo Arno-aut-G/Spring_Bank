@@ -3,7 +3,6 @@ package com.dachsbau;
 import javax.servlet.ServletContext;
 
 import com.dachsbau.context.ApplicationConfiguration;
-import com.dachsbau.web.MyBankServlet;
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.Wrapper;
